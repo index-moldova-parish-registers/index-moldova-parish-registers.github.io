@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://index-moldova-parish-registers.github.io/sitemap.xml

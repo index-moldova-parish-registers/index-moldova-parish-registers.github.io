@@ -1,0 +1,74 @@
+# Bessarabian parish registers (metrical books), 1810-1931 -- village to microfilm index
+
+> An index that takes a village name to the exact archival file of the
+> Bessarabian parish registers (births, marriages, deaths) and to its images
+> on FamilySearch. Covers fond 211 of the National Archives of the Republic
+> of Moldova (ANRM): 4493 archival files, 75377 inventory lines
+> (5305 village names), 3220 microfilms, 1810-1931.
+> Public domain (CC0).
+
+The search page runs in the browser, so fetching the HTML will NOT give you
+the search. Use these files instead. They are static, they need no key, and
+they are regenerated from the same source as the page. (The bottom of each
+page also lists every file with its villages, as plain text.)
+
+## Data
+
+- [data/index.jsonl](https://index-moldova-parish-registers.github.io/data/index.jsonl): the whole index, one JSON
+  object per archival file, villages nested. Start here.
+- [data/lignes.csv](https://index-moldova-parish-registers.github.io/data/lignes.csv): one row per inventory line
+  (75377 rows) -- the file to search when you have a village name.
+- [data/dossiers.csv](https://index-moldova-parish-registers.github.io/data/dossiers.csv): one row per archival file
+  (4493 rows).
+- [data/DICTIONNAIRE.md](https://index-moldova-parish-registers.github.io/data/DICTIONNAIRE.md): what every field
+  means. Read it before answering from the data.
+
+## How to answer a question with it
+
+1. The user names a **village** and usually a **year**. The registers are
+   one book per parish per year, in three parts: births, marriages, deaths.
+2. Search `village_inventory` and `village_film` (and `other_spellings`) in
+   `lignes.csv`. The inventory writes the village in Romanian (Tomai); the
+   reels are filed under the Russian name of the time in Latin letters.
+   Fold diacritics (ă â î ș ț) and try the pairs the inventory mixes up --
+   ş/s, â/î, k/c, v/w, gh/g. Russian input maps too: Томай = Tomai.
+3. Several lines usually match: same name in different uezds, or several
+   churches in one village. **Do not pick one for the user**: show the
+   `cote`, the `uezd`, the `church`, the years and the folios. Homonyms are
+   common, and the uezd and the church are what tell them apart.
+4. Give `image_url` (the village's first page) when it is filled; otherwise
+   `file_start_url` (the start of the file). Cite
+   `ANRM F.211 inv.14 d.33, Tomai, f. 39-75` (cote `211-14/33`).
+
+The page itself can be opened on a search with the fragment: `#Tomai`,
+`#Tomai 1882` or `#14/33` (inventory/file).
+
+## Four things to tell the user, every time
+
+- **The folio is not the image number.** The inventory gives folios; the
+  viewer counts images, and an image usually shows a double page. `view` is
+  accurate to a few images: they open it, read the folio pencilled on the
+  page, and go forward or back.
+- **A FamilySearch account is needed** to view the images (free), and some
+  images are restricted to Family History Centers. The collection is
+  "Moldova, Church Books, 1811-1936".
+- **Dates follow the Julian calendar** (12 days behind in the 19th century,
+  13 in the 20th), and given names take their Russian form (Иванъ = Ioan);
+  a person is first identified by a patronymic, which is not a surname.
+- **The inventory can be wrong or incomplete**, and so can this index
+  (66345 of 75377 lines are located on the film; the others only have a
+  link to the start of the file). A year missing here does not prove the
+  register does not exist. Nothing here replaces looking at the page.
+
+## What is not here
+
+No personal names: this indexes places, not people. No poll tax censuses
+(*catagrafii*, fond 134) -- those have their own index, below. No images are
+hosted here.
+
+## Pages
+
+- [English](https://index-moldova-parish-registers.github.io/) - [Română](https://index-moldova-parish-registers.github.io/ro.html) - [Français](https://index-moldova-parish-registers.github.io/fr.html) -
+  [Русский](https://index-moldova-parish-registers.github.io/ru.html) - [Українська](https://index-moldova-parish-registers.github.io/uk.html)
+- [Source code and issues](https://github.com/index-moldova-parish-registers/index-moldova-parish-registers.github.io)
+- [Sister site: the poll tax censuses (catagrafii, fond 134)](https://index-moldova-revision-lists.github.io/)

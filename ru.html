@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Moldova, Church Books: указатель метрических книг Бессарабии по каждому селу, 1810-1931</title>
+<meta name="description" content="Метрические книги Бессарабии, 1810-1931, по селам (ANRM, фонд 211), со ссылками на изображения FamilySearch.">
+<link rel="alternate" hreflang="en" href="https://index-moldova-parish-registers.github.io/">
+<link rel="alternate" hreflang="ro" href="https://index-moldova-parish-registers.github.io/ro.html">
+<link rel="alternate" hreflang="fr" href="https://index-moldova-parish-registers.github.io/fr.html">
+<link rel="alternate" hreflang="ru" href="https://index-moldova-parish-registers.github.io/ru.html">
+<link rel="alternate" hreflang="uk" href="https://index-moldova-parish-registers.github.io/uk.html">
+<link rel="alternate" hreflang="x-default" href="https://index-moldova-parish-registers.github.io/">
+<link rel="canonical" href="https://index-moldova-parish-registers.github.io/ru.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.filtres { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.filtres label { font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 6px; }
+.filtres select, .filtres input { padding: 6px 9px; border: 1.5px solid var(--border); border-radius: 7px;
+  font: inherit; font-size: 13px; color: var(--text); background: var(--bg); max-width: 100%; }
+.filtres input { width: 5.5em; }
+.ligne { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px;
+  display: flex; gap: 14px; align-items: center; }
+.ligne-corps { flex: 1; min-width: 0; }
+.ligne-tete { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 5px; }
+.ligne-tete .cote { font-size: 13px; font-weight: 600; color: var(--dim); }
+.ligne-loc { font-size: 15px; font-weight: 600; }
+.ligne-loc .film { font-weight: 400; color: var(--dim); font-size: 12.5px; margin-left: 6px; }
+.ligne-tete .fol { font-size: 13px; color: var(--text); }
+.ligne-info { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 12.5px; color: var(--dim); }
+.ligne-ani { font-size: 13px; color: var(--teal); font-weight: 600; }
+.ligne-ani.inconnu { color: var(--dim); font-weight: 400; font-size: 12px; font-style: italic; }
+.badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 5px; background: var(--violet-bg); color: var(--violet-txt); }
+.badge.film { background: var(--cf-fawn-bg); color: var(--fawn-txt); }
+.badge.absent { background: var(--erreur-bg); color: var(--pink); }
+.ligne-acces { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+.ligne-acces a { display: block; text-align: center; text-decoration: none; border-radius: 8px; white-space: nowrap; }
+.ligne-acces a.ouvrir { background: var(--violet); color: #fff; font-weight: 600; font-size: 14.5px; padding: 10px 18px; }
+.ligne-acces a.galerie { color: var(--violet); font-size: 12px; text-decoration: underline; padding: 2px 4px; }
+.ligne-acces a.liste { border: 1.5px solid var(--violet); color: var(--violet); font-size: 12.5px; padding: 6px 12px; }
+.ligne-acces a:hover { filter: brightness(1.1); }
+@media (max-width: 560px) { .ligne { flex-direction: column; align-items: stretch; } }
+.ligne-var { font-size: 12.5px; color: var(--dim); margin-top: 2px; font-style: italic; }
+.ligne-var span[title] { border-bottom: 1px dotted var(--dust); cursor: help; }
+#plus { margin: 4px auto 16px; display: block; }
+
+.ligne-acces .repli { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; font-size: 13px; }
+.ligne-acces .repli-lien { color: var(--dim); }
+.ligne-acces .contrib-q { font: inherit; font-size: 12.5px; background: none; border: 0; padding: 0; color: var(--teal); cursor: pointer; text-decoration: underline dotted; }
+.ligne-acces .contrib-form { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; }
+.ligne-acces .contrib-form input { font: inherit; padding: 3px 6px; border: 1px solid var(--dim); border-radius: 4px; background: transparent; color: inherit; min-width: 0; }
+.ligne-acces .contrib-form input.contrib-lien { flex: 1 1 18rem; }
+.ligne-acces .contrib-form input.contrib-petit { flex: 0 1 11rem; }
+.ligne-acces .contrib-msg { flex-basis: 100%; font-size: 12.5px; font-style: italic; color: var(--teal); }
+.ligne-acces .contrib-msg.erreur { color: #b3261e; }
+/* menu du haut : les deux index, puis les langues ; le titre dessous (Monica, 2026-10-25) */
+.barre { max-width: 900px; margin: 0 auto; padding: 14px 24px 0; display: flex; flex-wrap: wrap-reverse;
+  justify-content: space-between; align-items: flex-end; gap: 10px 24px; border-bottom: 1px solid var(--border); }
+nav.sites { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: -1px; }
+nav.sites a { padding: 10px 18px 9px; font-weight: 600; font-size: 15px; color: var(--dim); text-decoration: none;
+  border: 1px solid transparent; border-bottom: 0; border-radius: 8px 8px 0 0; }
+nav.sites a:hover { color: var(--text); background: var(--card); text-decoration: none; }
+nav.sites a[aria-current] { color: var(--violet-txt); background: var(--bg, #1c1b22); border-color: var(--border);
+  box-shadow: inset 0 3px 0 var(--violet); }
+.barre nav.langues { padding-bottom: 8px; }
+.entete { padding-top: 22px; }
+</style>
+</head>
+<body>
+<div class="barre">
+  <nav class="sites"><a href="ru.html" aria-current="page">Метрические книги</a><a href="https://index-moldova-revision-lists.github.io/ru.html">Ревизские сказки (catagrafii)</a></nav>
+  <nav class="langues"><a href="index.html" hreflang="en">English</a> <a href="ro.html" hreflang="ro">Română</a> <a href="fr.html" hreflang="fr">Français</a> <a href="ru.html" aria-current='page' hreflang="ru">Русский</a> <a href="uk.html" hreflang="uk">Українська</a></nav>
+</div>
+<header class="entete">
+  <div class="entete-titre">
+    <h1>Указатель метрических книг Бессарабии (ANRM, фонд 211)</h1>
+  </div>
+  <p class="chapeau">Фонд 211 Национального архива Республики Молдова (ANRM) содержит метрические книги церквей Бессарабии (рождения, браки, смерти) за 1810-1931 годы. FamilySearch (коллекция «Moldova, Church Books, 1811-1936») отснял их все, но найти село можно, только зная номер дела и плёнку. Эта страница показывает для каждого села в каждом деле годы, церковь и ссылку на плёнку, открытую на странице села, когда она известна.</p>
+</header>
+<!-- lots 5 et 6 : liens de menu « Aider » (aider.html) et « Aide » (help.html) -->
+<main>
+<div class="search-box">
+  <form id="recherche" role="search">
+    <label for="q" class="filter-label">Село, год или шифр дела (опись/дело)</label>
+    <div class="search-row">
+      <div class="champ">
+        <input id="q" class="search-input" type="search" placeholder="Загрузка указателя…" disabled autocomplete="off" spellcheck="false">
+      </div>
+      <button type="submit" id="bouton" class="btn" disabled>Искать</button>
+    </div>
+    <div class="filtres">
+      <label>Уезд <select id="f-uezd"></select></label>
+      <label title="Два села с одним названием различаются по церкви">Церковь <select id="f-eglise"></select></label>
+      <label>Годы с <input id="f-de" type="text" inputmode="numeric" placeholder="1850"></label>
+      <label>по <input id="f-a" type="text" inputmode="numeric" placeholder="1900"></label>
+    </div>
+  </form>
+  <p class="aide">Примеры: <a href="#Томай">Томай</a> · <a href="#Томай 1882">Томай 1882</a> · <a href="#14/33">14/33</a></p>
+</div>
+<div id="etat-vide" class="empty">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  <p class="si-charge">Введите название села</p>
+  <p class="si-chargement">Загрузка указателя…</p>
+  <p id="stats-ligne" class="si-charge"></p>
+</div>
+<p id="chargement" class="erreur" hidden>Не удалось загрузить указатель. Обновите страницу.</p>
+<p id="compte" class="status"></p>
+<div id="resultats" class="results" hidden></div>
+<button id="plus" class="btn" type="button" hidden></button>
+<div class="textes">
+<h2 id="registre">Что такое метрическая книга</h2>
+<p>При российском управлении (1812-1918), а затем при румынском, в Бессарабии не было гражданской регистрации: рождения, браки и смерти записывали церкви. Каждый приход вёл <strong>метрическую книгу</strong> (по-румынски <em>registru parohial</em>, <em>mitrică</em>), по одной книге на год, в <strong>двух экземплярах</strong>: один оставался в церкви, другой отправляли в епархию. Фонд 211 Национального архива объединяет экземпляры, которые сохранились.</p>
+<p>В книге <strong>три части</strong>: первая для рождений и крещений, вторая для браков, третья для смертей. Каждая часть нумерует свои записи с 1. С 1830-х годов книга представляет собой <strong>печатный бланк на русском языке</strong>, разделённый на графы, который священник заполняет от руки, по-русски или, в первые годы, по-румынски кириллицей. Запись читают <strong>графа за графой</strong>, как в примере ниже.</p>
+<div class="illus">
+<p>Разворот из части о рождениях в книге села Томай (Измаильский уезд) за 1882 год (ANRM 211-14/33, страница 3 дела): четыре крещения девочек, номера с 3 по 6, в январе. Наведите мышь на метку, чтобы увидеть её на странице.</p>
+<h3>Разворот</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:160000/113000">
+<img src="tomai-1882-p3.jpg" alt="Разворот книги о рождениях села Томай, 1882, с пронумерованными метками" width="1600" height="1130" loading="lazy" decoding="async">
+<span class="zone" data-z="A1" style="left:19.000%;top:15.300%;width:16.000%;height:2.400%"><b>1</b></span>
+<span class="zone" data-z="A1" style="left:57.500%;top:14.400%;width:27.500%;height:2.200%"></span>
+<span class="zone" data-z="A2" style="left:12.200%;top:17.700%;width:4.500%;height:71.700%"><b>2</b></span>
+<span class="zone" data-z="A3" style="left:16.800%;top:17.700%;width:4.500%;height:71.700%"><b>3</b></span>
+<span class="zone" data-z="A4" style="left:21.400%;top:18.500%;width:7.100%;height:71.000%"><b>4</b></span>
+<span class="zone" data-z="A5" style="left:28.500%;top:18.100%;width:20.000%;height:71.500%"><b>5</b></span>
+<span class="zone" data-z="A6" style="left:53.100%;top:19.500%;width:18.100%;height:70.000%"><b>6</b></span>
+<span class="zone" data-z="A7" style="left:71.200%;top:19.500%;width:10.200%;height:70.000%"><b>7</b></span>
+<span class="zone" data-z="A8" style="left:81.600%;top:19.500%;width:8.100%;height:70.000%"><b>8</b></span>
+<span class="zone" data-z="A9" style="left:83.100%;top:7.100%;width:3.600%;height:3.200%"><b>9</b></span>
+<span class="zone" data-z="A9" style="left:86.500%;top:13.300%;width:1.800%;height:2.200%"></span>
+</div>
+<ol class="illus-leg">
+<li data-z="A1"><b>1</b><span><strong>Печатный заголовок</strong>: «Метрической книги на 1882 годъ, часть первая, о родившихся»: «из метрической книги за 1882 год, часть первая, о родившихся». Заголовок идёт через обе страницы: год слева, остальное справа. Первая часть это рождения.</span></li>
+<li data-z="A2"><b>2</b><span><strong>Номер записи</strong>: «Счётъ родившихся», счёт рождений, в двух подграфах, одной для мальчиков и одной для девочек; вторая озаглавлена «женска пола», женский пол. Каждый пол считается отдельно. Четыре записи этой страницы это девочки, номера с 3 по 6.</span></li>
+<li data-z="A3"><b>3</b><span><strong>Месяц и день</strong>: «Мѣсяцъ и день», месяц и день, в двух подграфах: день рождения, затем день крещения. Месяц написан один раз, вверху графы («Генваря», «января»), и относится ко всем четырём записям.</span></li>
+<li data-z="A4"><b>4</b><span><strong>Ребёнок</strong>: «Имена родившихся», имена родившихся: только личное имя, без фамилии.</span></li>
+<li data-z="A5"><b>5</b><span><strong>Родители</strong>: «Званіе, имя, отчество и фамилія родителей, и какого вѣроисповѣданія»: звание, имя, отчество и фамилия родителей и их вероисповедание. Текст всегда идёт в одном порядке: звание и село, отец, «законная жена его», «его законная жена», мать, затем вероисповедание и указание, первый ли это брак.</span></li>
+<li data-z="A6"><b>6</b><span><strong>Восприемники</strong>: «Званіе, имя, отчество и фамилія воспріемниковъ»: звание, имя, отчество и фамилия восприемников. В записи 4 назван один восприемник, мужчина.</span></li>
+<li data-z="A7"><b>7</b><span><strong>Кто крестил</strong>: «Кто совершалъ таинство крещенія»: кто совершал таинство крещения, то есть священник и псаломщик. Их имена написаны также в конце каждой записи, на левой странице.</span></li>
+<li data-z="A8"><b>8</b><span><strong>Подписи свидетелей</strong>: «Рукоприкладство свидетелей», подписи свидетелей. Здесь графа пуста.</span></li>
+<li data-z="A9"><b>9</b><span><strong>Номера листов</strong>: Добавлены от руки, позже: 199 красным карандашом вверху справа и 3 чернилами над ним. На одной странице могут сосуществовать несколько нумераций: проверьте, какой следует опись.</span></li>
+</ol></div>
+<p class="illus-lien"><a href="tomai-1882-p3.jpg" target="_blank" rel="noopener">Открыть изображение в полном размере</a></p>
+<h3>Запись 4, на левой странице</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:60000/16950">
+<img src="tomai-1882-p3.jpg" alt="Разворот книги о рождениях села Томай, 1882, с пронумерованными метками" width="1600" height="1130" loading="lazy" decoding="async" style="position:absolute;max-width:none;width:266.667%;left:-32.000%;top:-233.333%">
+<span class="zone" data-z="B1" style="left:7.200%;top:10.000%;width:4.533%;height:12.667%"><b>1</b></span>
+<span class="zone" data-z="B2" style="left:13.333%;top:10.000%;width:10.667%;height:12.667%"><b>2</b></span>
+<span class="zone" data-z="B3" style="left:26.667%;top:19.333%;width:12.800%;height:14.667%"><b>3</b></span>
+<span class="zone" data-z="B4" style="left:43.200%;top:23.333%;width:53.867%;height:28.000%"><b>4</b></span>
+<span class="zone" data-z="B5" style="left:43.733%;top:51.333%;width:51.200%;height:20.000%"><b>5</b></span>
+<span class="zone" data-z="B6" style="left:41.067%;top:73.333%;width:50.667%;height:18.667%"><b>6</b></span>
+</div>
+<ol class="illus-leg">
+<li data-z="B1"><b>1</b><span><strong>Номер записи</strong>: «4», в графе девочек: четвёртая девочка, родившаяся в этой части.</span></li>
+<li data-z="B2"><b>2</b><span><strong>Даты</strong>: 12 и 17: родилась 12 января 1882 года, крещена 17 января.</span></li>
+<li data-z="B3"><b>3</b><span><strong>Ребёнок</strong>: «Анна».</span></li>
+<li data-z="B4"><b>4</b><span><strong>Родители</strong>: «Крестьянинъ с. Томай Измаильскаго уѣзда Бессарабской губерніи»: крестьянин села Томай Измаильского уезда Бессарабской губернии; затем отец, «Иванъ Димитріевъ», Иван сын Димитрия, и его фамилия; затем «законная жена его Елисавета Георгіева», его законная жена Елисавета, дочь Георгия. У матери здесь нет собственной фамилии: отчество говорит, чья она дочь.</span></li>
+<li data-z="B5"><b>5</b><span><strong>Вероисповедание и брак</strong>: «оба православнаго вѣроисповѣданія, первобрачные»: оба православного вероисповедания, в первом браке.</span></li>
+<li data-z="B6"><b>6</b><span><strong>Духовенство</strong>: «Священникъ … съ п. ч. псаломщикомъ …»: священник … с причетником, псаломщиком …, далее их имена, написанные поперёк граф в конце записи. «п. ч.» сокращает «причетникомъ», «причетник».</span></li>
+</ol></div>
+<h3>Восприемник и священник записи 4, на правой странице</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:61600/13560">
+<img src="tomai-1882-p3.jpg" alt="Разворот книги о рождениях села Томай, 1882, с пронумерованными метками" width="1600" height="1130" loading="lazy" decoding="async" style="position:absolute;max-width:none;width:259.740%;left:-136.364%;top:-300.000%">
+<span class="zone" data-z="C1" style="left:1.558%;top:36.667%;width:40.000%;height:30.833%"><b>1</b></span>
+<span class="zone" data-z="C2" style="left:49.091%;top:39.167%;width:28.052%;height:34.167%"><b>2</b></span>
+<span class="zone" data-z="C3" style="left:75.584%;top:25.000%;width:21.039%;height:51.667%"><b>3</b></span>
+</div>
+<ol class="illus-leg">
+<li data-z="C1"><b>1</b><span><strong>Восприемник</strong>: «Крестьянинъ с. Томай Константинъ Θедоровъ»: крестьянин села Томай Константин сын Феодора, далее его фамилия. Отчество разорвано в конце строки («Θедо-», затем «ровъ»). Один восприемник, восприемницы нет.</span></li>
+<li data-z="C2"><b>2</b><span><strong>Кто крестил</strong>: Те же священник и псаломщик, что в конце записи, на левой странице.</span></li>
+<li data-z="C3"><b>3</b><span><strong>Подписи свидетелей</strong>: Для этой записи пусты.</span></li>
+</ol></div>
+<p class="illus-sous">Скан страницы книги, Национальный архив Республики Молдова (ANRM), фонд 211.</p>
+</div>
+<h2 id="mode-emploi">Как пользоваться</h2>
+<ol><li><strong>Нужна учётная запись FamilySearch.</strong> Она бесплатная.</li><li><strong>Введите название села.</strong> Опись пишет его по-румынски (<em>Tomai</em>); плёнка внесена в каталог под тогдашним русским названием, латиницей. Ищутся оба написания. Можно вводить и кириллицей (<em>Томай</em>, <em>Tomai</em>). Диакритические знаки не важны, достаточно первых букв названия. Можно добавить год (<em>Tomai 1882</em>) или шифр (<em>14/33</em>).</li><li><strong>Сузьте список</strong> по уезду, по церкви и по годам. В списке церквей в скобках указано число строк каждой.</li><li><strong>Прочтите результат.</strong> Каждая строка это одно село в одном деле. Вверху: шифр дела (<em>211-14/33</em>), село так, как его пишет опись, и, более мелким шрифтом, название, под которым внесена плёнка, если оно отличается. Затем годы, уезд, церковь и листы села в деле.</li><li><strong>Нажмите кнопку.</strong> «Открыть на странице села» открывает изображение на FamilySearch на первой странице села, с точностью до нескольких кадров. Если село не удалось найти на плёнке, кнопки нет, есть простая ссылка: «начало дела» открывает первое изображение дела или титульный кадр перед ним; если начало дела тоже неизвестно, «дела на плёнке» открывает список дел на плёнке, где дело выбирают по шифру. Если вы нашли нужное изображение, «Указать правильную ссылку» позволяет отправить его ссылку.</li><li><strong>Затем листайте страницы.</strong> Прочтите номер листа, написанный на странице, сравните его с листами из результата и двигайтесь вперёд или назад.</li></ol>
+<h2 id="feuillet">Листы и счётчик FamilySearch</h2>
+<p>Дело цитируют как <strong>211-опись/дело</strong>: <em>211-14/33</em> означает фонд 211, опись 14, дело 33. Для каждого села опись указывает его <strong>листы</strong> (<em>листы</em>, по-румынски <em>filele</em>): листы исходной книги, пронумерованные архивом, например «листы 39-75».</p>
+<p>Лист это не кадр. Кадр плёнки обычно показывает разворот, то есть два листа рядом, а один и тот же лист иногда снят дважды. Поэтому листы из описи показывают <strong>где находится село в деле и какой оно длины</strong>, а не номер кадра.</p>
+<p>На одной плёнке микрофильма подряд идёт несколько дел, а просмотрщик FamilySearch открывает <strong>одно дело за раз</strong>. Счётчик, который он показывает («955 of 1,182»), это <strong>счётчик дела</strong>, а не плёнки: кадр правильный, даже если номер кажется маленьким.</p>
+<h2 id="noms">Названия сёл</h2>
+<p>Сёла записаны <strong>по-румынски</strong>, в написании описи Архива (<em>Năvârneţ</em>); современное написание (<em>Nevîrneț</em>) дано рядом. FamilySearch внёс плёнки в каталог под тогдашним <strong>русским</strong> названием, записанным латиницей. Поиск принимает оба названия, а также старые написания того же села (<em>Berezloghi</em> вместо <em>Berezlogi</em>). Когда названия различаются, строка результата показывает оба.</p>
+<p>Многие сёла носят одинаковое название в разных уездах, а в некоторых сёлах <strong>несколько церквей</strong>, и у каждой своя книга. Различить их помогают <strong>церковь</strong> (её <em>hram</em>, то есть храмовый святой или праздник: <em>Sf. Nicolae</em>, <em>Adormirea</em>) и уезд. Проверьте и то и другое, прежде чем открывать изображение. Названия церквей даны так, как их пишет опись, по-румынски (<em>Sf. Nicolae</em>, <em>Adormirea Maicii Domnului</em>).</p>
+<h2 id="pieges">Подводные камни</h2>
+<ul class='illus-pieges'><li><strong>Не хватает лет.</strong> Если у села нет строки за какой-то год, книга этого года могла быть утрачена или не снята на плёнку, либо опись была неверно прочитана при построении этого указателя. Указатель опирается на опись Архива, прочитанную машиной: отсутствие в указателе не доказывает, что книги нет.</li><li><strong>Село может оказаться в деле соседнего прихода.</strong> Село без церкви записывали в книгу прихода, к которому оно относилось, часто под названием этого прихода. Ищите и соседние сёла.</li><li><strong>Даты даны по юлианскому календарю.</strong> Российская империя сохраняла старый стиль: отставание от западного календаря составляло 12 дней в XIX веке и 13 дней в XX веке. Рождение, записанное 12 января 1882 года, приходится на 24 января по григорианскому календарю.</li><li><strong>Имена написаны по-русски.</strong> Имена принимают русскую форму (<em>Иванъ</em> соответствует румынскому Ioan; <em>Георгій</em> соответствует румынскому Gheorghe), а человека сначала называют по отчеству: <em>Георгіева</em> значит «дочь Георгия», это не фамилия. Фамилия, если она записана, идёт после.</li><li><strong>Ссылки попадают в нужное место с точностью до нескольких кадров.</strong> Первая страница села найдена на плёнке, без постраничного чтения. Откройте её, прочтите лист, написанный на странице, затем двигайтесь вперёд или назад.</li></ul>
+</div>
+</main>
+<footer class="textes">
+<p>Составлено по описям Национального архива Республики Молдова и по каталогу микрофильмов FamilySearch. Изображения архива здесь не размещаются.</p><p>Данные и эта страница находятся в общественном достоянии (<a href='https://creativecommons.org/publicdomain/zero/1.0/' rel='license'>CC0 1.0</a>). Код и данные: <a href='https://github.com/index-moldova-parish-registers/index-moldova-parish-registers.github.io'>открытый репозиторий</a>.</p><p>Как ссылаться на указатель: <cite><em>Указатель метрических книг Бессарабии, фонд 211 ANRM</em>, 2026, https://index-moldova-parish-registers.github.io/</cite>.</p><p>Нашли ошибку? <a href='https://github.com/index-moldova-parish-registers/index-moldova-parish-registers.github.io/issues'>Откройте issue в репозитории</a>.</p>
+</footer>
+<script>window.TEXTES={"placeholder": "Томай, Томай 1882, 14/33…", "stats": "Дел фонда 211: {n}", "rien": "Ничего не найдено. Попробуйте более короткое написание, без года, или шифр.", "plus": "показать ещё {n}", "sansTitre": "название не указано в описи", "anInconnu": "год не указан в описи", "filmSeul": "нет в описи", "sansInv": "опись недоступна", "sansTexte": "дела нет в тексте описи", "pasFilm": "на плёнке не найдено", "bobine": "плёнка {b}", "vues": "снимки {a}–{b}", "ouvrir": "Открыть на странице села →", "debut": "Открыть в начале дела →", "liste": "Дела на плёнке →", "debutLien": "начало дела →", "listeLien": "дела на плёнке →", "indiquer": "Указать правильную ссылку", "indiquerListe": "Ссылка ещё не найдена, укажите правильную", "contribPh": "ссылка FamilySearch на изображение, где начинается это село", "contribImage": "номер изображения (необязательно)", "envoyer": "Отправить", "annuler": "Отмена", "invalide": "Это не ссылка на изображение FamilySearch: она должна содержать ark:/61903/3:1:…", "merci": "Спасибо, получено.", "erreur": "Не удалось отправить. Попробуйте позже.", "feuillets": "листы {f}", "toutes": "Все", "tousUezd": "Все уезды", "variantes": "другие возможные написания: ", "sources": {"orthographe": "то же название, другое написание", "film": "написание на плёнке FamilySearch", "inventaire": "второе название из описи", "wikidata": "подтверждено Викиданными", "agents": "проверенное соответствие"}, "eglises": {"rabinat": "Раввинат (еврейская метрическая книга)", "adormire": "Adormirea Maicii Domnului", "mihail": "Sf. Arh. Mihail și Gavriil", "nicolae": "Sf. Nicolae", "dumitru": "Sf. Dumitru", "gheorghe": "Sf. Gheorghe", "paraschiva": "Sf. Parascheva", "ioan": "Sf. Ioan", "treime": "Sf. Treime", "nasterea": "Nașterea Maicii Domnului", "inaltare": "Înălțarea Domnului", "acoperamant": "Acoperământul Maicii Domnului", "petru": "Sf. Petru și Pavel", "vasile": "Sf. Vasile", "constantin": "Sf. Constantin și Elena", "schimbare": "Schimbarea la Față", "intrare": "Intrarea în Biserică", "buna_vestire": "Buna Vestire", "rusalii": "Pogorârea Sf. Duh", "ilie": "Sf. Ilie", "pantelimon": "Sf. Pantelimon", "andrei": "Sf. Andrei", "teodor": "Sf. Teodor", "tuturor_sfintilor": "Tuturor Sfinților", "trei_ierarhi": "Sf. Trei Ierarhi", "spiridon": "Sf. Spiridon", "varvara": "Sf. Varvara", "afanasie": "Sf. Afanasie", "haralambie": "Sf. Haralambie", "craciun": "Nașterea Domnului", "alexandru": "Sf. Alexandru Nevski", "grigore": "Sf. Grigore Teologul", "trifon": "Sf. Trifon", "mitrofan": "Sf. Mitrofan", "ecaterina": "Sf. Ecaterina", "elisabeta": "Sf. Elisabeta", "onufrie": "Sf. Onufrie", "ioachim_ana": "Sf. Ioachim și Ana", "luca": "Sf. Ap. Luca", "filip": "Sf. Filip", "averchie": "Sf. Averchie", "inviere": "Învierea Domnului", "intimpinare": "Întâmpinarea Domnului", "pavel_teba": "Sf. Pavel Tebeul", "pavel": "Sf. Ap. Pavel"}, "invAbsents": [21], "loc": "ru"}; window.UEZD={"1": "Bălți", "12": "Bălți", "16": "Bălți", "2": "Tighina", "14": "Tighina", "27": "Tighina", "3": "Chișinău", "11": "Chișinău", "4": "Cahul", "17": "Cahul", "5": "Orhei", "13": "Orhei", "6": "Soroca", "15": "Soroca", "18": "Cetatea Albă", "22": "Cetatea Albă", "19": "Hotin", "34": "Hotin", "20": "Ismail", "23": "Tiraspol"}; window.CONTRIB={"url": "https://tanwrwmofpxsssismaqx.supabase.co", "cle": "sb_publishable_qESNKnFYlNkSaOBwNtZyHg_ZC3t4bn9"};</script>
+<script src="app.js?v=056c61f7"></script>
+<script>addEventListener("hashchange",function(){var q=document.getElementById("q");q.value=decodeURIComponent(location.hash.slice(1));document.getElementById("bouton").click();});</script>
+<script>(function(){document.querySelectorAll(".illus-fig").forEach(function(fig){
+var pl=fig.querySelector(".plaque"),zs=fig.querySelectorAll(".zone"),ls=fig.querySelectorAll("ol.illus-leg li");
+if(!pl||!zs.length)return;
+function pose(c,a){pl.classList.toggle("focalise",a);
+zs.forEach(function(z){var s=z.getAttribute("data-z")===c;z.classList.toggle("eteint",a&&!s);z.classList.toggle("actif",a&&s);});
+ls.forEach(function(l){l.classList.toggle("actif",a&&l.getAttribute("data-z")===c);});}
+function lie(x){var c=x.getAttribute("data-z");
+x.addEventListener("mouseenter",function(){pose(c,true);});x.addEventListener("mouseleave",function(){pose(c,false);});
+x.addEventListener("focus",function(){pose(c,true);});x.addEventListener("blur",function(){pose(c,false);});}
+zs.forEach(lie);ls.forEach(function(l){l.setAttribute("tabindex","0");lie(l);});});})();</script>
+<script data-goatcounter="https://imrp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

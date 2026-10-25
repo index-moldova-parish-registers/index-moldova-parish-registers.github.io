@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Moldova, Church Books: index of the Bessarabian parish registers by village, 1810-1931</title>
+<meta name="description" content="Parish registers of Bessarabia, 1810-1931, village by village (ANRM fond 211), with links to the images on FamilySearch.">
+<link rel="alternate" hreflang="en" href="https://index-moldova-parish-registers.github.io/">
+<link rel="alternate" hreflang="ro" href="https://index-moldova-parish-registers.github.io/ro.html">
+<link rel="alternate" hreflang="fr" href="https://index-moldova-parish-registers.github.io/fr.html">
+<link rel="alternate" hreflang="ru" href="https://index-moldova-parish-registers.github.io/ru.html">
+<link rel="alternate" hreflang="uk" href="https://index-moldova-parish-registers.github.io/uk.html">
+<link rel="alternate" hreflang="x-default" href="https://index-moldova-parish-registers.github.io/">
+<link rel="canonical" href="https://index-moldova-parish-registers.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.filtres { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.filtres label { font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 6px; }
+.filtres select, .filtres input { padding: 6px 9px; border: 1.5px solid var(--border); border-radius: 7px;
+  font: inherit; font-size: 13px; color: var(--text); background: var(--bg); max-width: 100%; }
+.filtres input { width: 5.5em; }
+.ligne { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px;
+  display: flex; gap: 14px; align-items: center; }
+.ligne-corps { flex: 1; min-width: 0; }
+.ligne-tete { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 5px; }
+.ligne-tete .cote { font-size: 13px; font-weight: 600; color: var(--dim); }
+.ligne-loc { font-size: 15px; font-weight: 600; }
+.ligne-loc .film { font-weight: 400; color: var(--dim); font-size: 12.5px; margin-left: 6px; }
+.ligne-tete .fol { font-size: 13px; color: var(--text); }
+.ligne-info { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 12.5px; color: var(--dim); }
+.ligne-ani { font-size: 13px; color: var(--teal); font-weight: 600; }
+.ligne-ani.inconnu { color: var(--dim); font-weight: 400; font-size: 12px; font-style: italic; }
+.badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 5px; background: var(--violet-bg); color: var(--violet-txt); }
+.badge.film { background: var(--cf-fawn-bg); color: var(--fawn-txt); }
+.badge.absent { background: var(--erreur-bg); color: var(--pink); }
+.ligne-acces { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+.ligne-acces a { display: block; text-align: center; text-decoration: none; border-radius: 8px; white-space: nowrap; }
+.ligne-acces a.ouvrir { background: var(--violet); color: #fff; font-weight: 600; font-size: 14.5px; padding: 10px 18px; }
+.ligne-acces a.galerie { color: var(--violet); font-size: 12px; text-decoration: underline; padding: 2px 4px; }
+.ligne-acces a.liste { border: 1.5px solid var(--violet); color: var(--violet); font-size: 12.5px; padding: 6px 12px; }
+.ligne-acces a:hover { filter: brightness(1.1); }
+@media (max-width: 560px) { .ligne { flex-direction: column; align-items: stretch; } }
+.ligne-var { font-size: 12.5px; color: var(--dim); margin-top: 2px; font-style: italic; }
+.ligne-var span[title] { border-bottom: 1px dotted var(--dust); cursor: help; }
+#plus { margin: 4px auto 16px; display: block; }
+
+.ligne-acces .repli { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; font-size: 13px; }
+.ligne-acces .repli-lien { color: var(--dim); }
+.ligne-acces .contrib-q { font: inherit; font-size: 12.5px; background: none; border: 0; padding: 0; color: var(--teal); cursor: pointer; text-decoration: underline dotted; }
+.ligne-acces .contrib-form { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; }
+.ligne-acces .contrib-form input { font: inherit; padding: 3px 6px; border: 1px solid var(--dim); border-radius: 4px; background: transparent; color: inherit; min-width: 0; }
+.ligne-acces .contrib-form input.contrib-lien { flex: 1 1 18rem; }
+.ligne-acces .contrib-form input.contrib-petit { flex: 0 1 11rem; }
+.ligne-acces .contrib-msg { flex-basis: 100%; font-size: 12.5px; font-style: italic; color: var(--teal); }
+.ligne-acces .contrib-msg.erreur { color: #b3261e; }
+/* menu du haut : les deux index, puis les langues ; le titre dessous (Monica, 2026-10-25) */
+.barre { max-width: 900px; margin: 0 auto; padding: 14px 24px 0; display: flex; flex-wrap: wrap-reverse;
+  justify-content: space-between; align-items: flex-end; gap: 10px 24px; border-bottom: 1px solid var(--border); }
+nav.sites { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: -1px; }
+nav.sites a { padding: 10px 18px 9px; font-weight: 600; font-size: 15px; color: var(--dim); text-decoration: none;
+  border: 1px solid transparent; border-bottom: 0; border-radius: 8px 8px 0 0; }
+nav.sites a:hover { color: var(--text); background: var(--card); text-decoration: none; }
+nav.sites a[aria-current] { color: var(--violet-txt); background: var(--bg, #1c1b22); border-color: var(--border);
+  box-shadow: inset 0 3px 0 var(--violet); }
+.barre nav.langues { padding-bottom: 8px; }
+.entete { padding-top: 22px; }
+</style>
+</head>
+<body>
+<div class="barre">
+  <nav class="sites"><a href="index.html" aria-current="page">Parish registers</a><a href="https://index-moldova-revision-lists.github.io/">Revision lists (catagrafii)</a></nav>
+  <nav class="langues"><a href="index.html" aria-current='page' hreflang="en">English</a> <a href="ro.html" hreflang="ro">Română</a> <a href="fr.html" hreflang="fr">Français</a> <a href="ru.html" hreflang="ru">Русский</a> <a href="uk.html" hreflang="uk">Українська</a></nav>
+</div>
+<header class="entete">
+  <div class="entete-titre">
+    <h1>Index of Bessarabian parish registers (ANRM fond 211)</h1>
+  </div>
+  <p class="chapeau">Fond 211 of the National Archives of the Republic of Moldova (ANRM) holds the parish registers of Bessarabia (births, marriages, deaths), 1810-1931. FamilySearch (collection “Moldova, Church Books, 1811-1936”) has filmed all of them, but a village can only be found if you already know the file number and the film. This page gives, for each village in each file, its years, its church and the link to the reel, opened at the village&#x27;s page when it is known.</p>
+</header>
+<!-- lots 5 et 6 : liens de menu « Aider » (aider.html) et « Aide » (help.html) -->
+<main>
+<div class="search-box">
+  <form id="recherche" role="search">
+    <label for="q" class="filter-label">Village, year or file number (inventory/file)</label>
+    <div class="search-row">
+      <div class="champ">
+        <input id="q" class="search-input" type="search" placeholder="Loading the index…" disabled autocomplete="off" spellcheck="false">
+      </div>
+      <button type="submit" id="bouton" class="btn" disabled>Search</button>
+    </div>
+    <div class="filtres">
+      <label>Uezd <select id="f-uezd"></select></label>
+      <label title="Two villages with the same name are told apart by their church">Church <select id="f-eglise"></select></label>
+      <label>Years from <input id="f-de" type="text" inputmode="numeric" placeholder="1850"></label>
+      <label>to <input id="f-a" type="text" inputmode="numeric" placeholder="1900"></label>
+    </div>
+  </form>
+  <p class="aide">Examples: <a href="#Tomai">Tomai</a> · <a href="#Tomai 1882">Tomai 1882</a> · <a href="#14/33">14/33</a></p>
+</div>
+<div id="etat-vide" class="empty">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  <p class="si-charge">Type a village name</p>
+  <p class="si-chargement">Loading the index…</p>
+  <p id="stats-ligne" class="si-charge"></p>
+</div>
+<p id="chargement" class="erreur" hidden>The index could not be loaded. Reload the page.</p>
+<p id="compte" class="status"></p>
+<div id="resultats" class="results" hidden></div>
+<button id="plus" class="btn" type="button" hidden></button>
+<div class="textes">
+<h2 id="registre">What a parish register is</h2>
+<p>Under Russian rule (1812-1918), then under Romanian rule, Bessarabia had no civil registry: births, marriages and deaths were recorded by the churches. Each parish kept a <strong>parish register</strong> (<em>метрическая книга</em>, <em>metricheskaya kniga</em>, “metrical book”), one book per year, in <strong>two copies</strong>: one stayed at the church, the other was sent to the diocese. Fond 211 of the National Archives holds the copies that survived.</p>
+<p>A register has <strong>three parts</strong>: the first for births and baptisms, the second for marriages, the third for deaths. Each part numbers its acts from 1. From the 1830s the book is a <strong>printed form in Russian</strong>, divided into columns, which the priest fills in by hand, in Russian or, in the early years, in Romanian written in Cyrillic. An act is read <strong>column by column</strong>, as in the example below.</p>
+<div class="illus">
+<p>A double page from the births part of the register of Tomai (uezd of Izmail) for 1882 (ANRM 211-14/33, page 3 of the file): four baptisms of girls, numbers 3 to 6, in January. Hover a marker to see it on the page.</p>
+<h3>The double page</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:160000/113000">
+<img src="tomai-1882-p3.jpg" alt="Double page of the births register of Tomai, 1882, with numbered markers" width="1600" height="1130" loading="lazy" decoding="async">
+<span class="zone" data-z="A1" style="left:19.000%;top:15.300%;width:16.000%;height:2.400%"><b>1</b></span>
+<span class="zone" data-z="A1" style="left:57.500%;top:14.400%;width:27.500%;height:2.200%"></span>
+<span class="zone" data-z="A2" style="left:12.200%;top:17.700%;width:4.500%;height:71.700%"><b>2</b></span>
+<span class="zone" data-z="A3" style="left:16.800%;top:17.700%;width:4.500%;height:71.700%"><b>3</b></span>
+<span class="zone" data-z="A4" style="left:21.400%;top:18.500%;width:7.100%;height:71.000%"><b>4</b></span>
+<span class="zone" data-z="A5" style="left:28.500%;top:18.100%;width:20.000%;height:71.500%"><b>5</b></span>
+<span class="zone" data-z="A6" style="left:53.100%;top:19.500%;width:18.100%;height:70.000%"><b>6</b></span>
+<span class="zone" data-z="A7" style="left:71.200%;top:19.500%;width:10.200%;height:70.000%"><b>7</b></span>
+<span class="zone" data-z="A8" style="left:81.600%;top:19.500%;width:8.100%;height:70.000%"><b>8</b></span>
+<span class="zone" data-z="A9" style="left:83.100%;top:7.100%;width:3.600%;height:3.200%"><b>9</b></span>
+<span class="zone" data-z="A9" style="left:86.500%;top:13.300%;width:1.800%;height:2.200%"></span>
+</div>
+<ol class="illus-leg">
+<li data-z="A1"><b>1</b><span><strong>Printed heading</strong>: “Метрической книги на 1882 годъ, часть первая, о родившихся” (Metricheskoy knigi na 1882 god, chast pervaya, o rodivshikhsya): “Of the metrical book for the year 1882, part one, on those born”. The heading runs across the two pages: the year on the left, the rest on the right. The first part is the births.</span></li>
+<li data-z="A2"><b>2</b><span><strong>Act number</strong>: “Счётъ родившихся” (Schyot rodivshikhsya), the count of those born, in two sub-columns, one for boys and one for girls; the second is headed “женска пола” (zhenska pola), female sex. Each sex is counted separately. The four acts of this page are girls, numbers 3 to 6.</span></li>
+<li data-z="A3"><b>3</b><span><strong>Month and day</strong>: “Мѣсяцъ и день” (Mesyats i den), month and day, in two sub-columns: the day of birth, then the day of baptism. The month is written once, at the top of the column (“Генваря”, Genvarya, “of January”), and holds for the four acts.</span></li>
+<li data-z="A4"><b>4</b><span><strong>The child</strong>: “Имена родившихся” (Imena rodivshikhsya), the names of those born: a given name only, no surname.</span></li>
+<li data-z="A5"><b>5</b><span><strong>The parents</strong>: “Званіе, имя, отчество и фамилія родителей, и какого вѣроисповѣданія” (Zvanie, imya, otchestvo i familiya roditeley, i kakogo veroispovedaniya): rank, given name, patronymic and surname of the parents, and their confession. The text always follows the same order: rank and village, the father, “законная жена его” (zakonnaya zhena ego), “his lawful wife”, the mother, then the confession and whether it is a first marriage.</span></li>
+<li data-z="A6"><b>6</b><span><strong>The godparents</strong>: “Званіе, имя, отчество и фамилія воспріемниковъ” (Zvanie, imya, otchestvo i familiya vospriemnikov): rank, given name, patronymic and surname of the godparents. Act 4 names a single godparent, a man.</span></li>
+<li data-z="A7"><b>7</b><span><strong>Who baptised</strong>: “Кто совершалъ таинство крещенія” (Kto sovershal tainstvo kreshcheniya): who performed the sacrament of baptism, that is the priest and the psalm-reader. Their names are also written at the end of each act, on the left page.</span></li>
+<li data-z="A8"><b>8</b><span><strong>Witnesses’ signatures</strong>: “Рукоприкладство свидетелей” (Rukoprikladstvo svidetelei), the signatures of the witnesses. The column is empty here.</span></li>
+<li data-z="A9"><b>9</b><span><strong>Folio numbers</strong>: Added by hand, after the fact: 199 in red pencil at the top right, and a 3 in ink above it. Several numberings can coexist on a page: check which one the inventory follows.</span></li>
+</ol></div>
+<p class="illus-lien"><a href="tomai-1882-p3.jpg" target="_blank" rel="noopener">Open the image at full size</a></p>
+<h3>Act 4, on the left page</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:60000/16950">
+<img src="tomai-1882-p3.jpg" alt="Double page of the births register of Tomai, 1882, with numbered markers" width="1600" height="1130" loading="lazy" decoding="async" style="position:absolute;max-width:none;width:266.667%;left:-32.000%;top:-233.333%">
+<span class="zone" data-z="B1" style="left:7.200%;top:10.000%;width:4.533%;height:12.667%"><b>1</b></span>
+<span class="zone" data-z="B2" style="left:13.333%;top:10.000%;width:10.667%;height:12.667%"><b>2</b></span>
+<span class="zone" data-z="B3" style="left:26.667%;top:19.333%;width:12.800%;height:14.667%"><b>3</b></span>
+<span class="zone" data-z="B4" style="left:43.200%;top:23.333%;width:53.867%;height:28.000%"><b>4</b></span>
+<span class="zone" data-z="B5" style="left:43.733%;top:51.333%;width:51.200%;height:20.000%"><b>5</b></span>
+<span class="zone" data-z="B6" style="left:41.067%;top:73.333%;width:50.667%;height:18.667%"><b>6</b></span>
+</div>
+<ol class="illus-leg">
+<li data-z="B1"><b>1</b><span><strong>Act number</strong>: “4”, in the girls’ column: the fourth girl born in this part.</span></li>
+<li data-z="B2"><b>2</b><span><strong>Dates</strong>: 12 and 17: born on 12 January 1882, baptised on 17 January.</span></li>
+<li data-z="B3"><b>3</b><span><strong>The child</strong>: “Анна” (Anna): Anna.</span></li>
+<li data-z="B4"><b>4</b><span><strong>The parents</strong>: “Крестьянинъ с. Томай Измаильскаго уѣзда Бессарабской губерніи” (Krestyanin s. Tomai Izmailskago uyezda Bessarabskoy gubernii): “peasant of the village of Tomai, uezd of Izmail, government of Bessarabia”; then the father, “Иванъ Димитріевъ” (Ivan Dimitriev), Ivan son of Dimitrie, and his surname; then “законная жена его Елисавета Георгіева” (zakonnaya zhena ego Elisaveta Georgieva), “his lawful wife Elisaveta, daughter of Gheorghe”. The mother has no surname of her own here: the patronymic says whose daughter she is.</span></li>
+<li data-z="B5"><b>5</b><span><strong>Confession and marriage</strong>: “оба православнаго вѣроисповѣданія, первобрачные” (oba pravoslavnago veroispovedaniya, pervobrachnye): “both of the Orthodox confession, in their first marriage”.</span></li>
+<li data-z="B6"><b>6</b><span><strong>The clergy</strong>: “Священникъ … съ п. ч. псаломщикомъ …” (Svyashchennik … s p. ch. psalomshchikom …): “the priest … with the cleric, psalm-reader …”, followed by their names, written across the columns at the end of the act. “п. ч.” (p. ch.) stands for “причетникомъ” (prichetnikom), “cleric”.</span></li>
+</ol></div>
+<h3>The godparent and the priest of act 4, on the right page</h3>
+<div class="illus-fig">
+<div class="plaque" style="aspect-ratio:61600/13560">
+<img src="tomai-1882-p3.jpg" alt="Double page of the births register of Tomai, 1882, with numbered markers" width="1600" height="1130" loading="lazy" decoding="async" style="position:absolute;max-width:none;width:259.740%;left:-136.364%;top:-300.000%">
+<span class="zone" data-z="C1" style="left:1.558%;top:36.667%;width:40.000%;height:30.833%"><b>1</b></span>
+<span class="zone" data-z="C2" style="left:49.091%;top:39.167%;width:28.052%;height:34.167%"><b>2</b></span>
+<span class="zone" data-z="C3" style="left:75.584%;top:25.000%;width:21.039%;height:51.667%"><b>3</b></span>
+</div>
+<ol class="illus-leg">
+<li data-z="C1"><b>1</b><span><strong>The godparent</strong>: “Крестьянинъ с. Томай Константинъ Θедоровъ” (Krestyanin s. Tomai Konstantin Feodorov): “peasant of the village of Tomai, Constantin son of Feodor”, followed by his surname. The patronymic is cut at the end of the line (“Θедо-”, Fedo-, the start of Feodorov, then “ровъ”, rov, its end). One godparent only, no godmother.</span></li>
+<li data-z="C2"><b>2</b><span><strong>Who baptised</strong>: The same priest and psalm-reader as at the end of the act, on the left page.</span></li>
+<li data-z="C3"><b>3</b><span><strong>Witnesses’ signatures</strong>: Empty for this act.</span></li>
+</ol></div>
+<p class="illus-sous">Scan of the register page, National Archives of the Republic of Moldova (ANRM), fond 211.</p>
+</div>
+<h2 id="mode-emploi">How to use this page</h2>
+<ol><li><strong>You need a FamilySearch account.</strong> It is free.</li><li><strong>Type the name of a village.</strong> The inventory writes it in Romanian (<em>Tomai</em>); the reel is filed under its Russian name of the time, in Latin letters. Both spellings are searched. Cyrillic input works too (<em>Томай</em>, <em>Tomai</em>). Accents do not matter, and the first letters of the name are enough. You can add a year (<em>Tomai 1882</em>) or a file number (<em>14/33</em>).</li><li><strong>Narrow the list</strong> by uezd (the district), by church and by years. The church list gives, in brackets, the number of lines of each church.</li><li><strong>Read a result.</strong> Each line is one village in one file. At the top: the file reference (<em>211-14/33</em>), the village as the inventory writes it and, in smaller type, the name the film is filed under, when it differs. Then the years, the uezd, the church and the folios of the village in the file.</li><li><strong>Click the button.</strong> “Open at the village” opens the image on FamilySearch at the first page of the village, give or take a few images. When the village could not be located on the film, there is no button but a plain link: “start of the file” opens the first image of the file, or a title image just before it; when the start of the file is not known either, “files on the reel” opens the list of files on the reel, where you pick the file by its reference. If you find the right image, “Suggest the right link” lets you send its link.</li><li><strong>Then turn the pages.</strong> Read the folio number written on the page, compare it with the folios of the result, and go forward or back.</li></ol>
+<h2 id="feuillet">Folios, and the counter of FamilySearch</h2>
+<p>A file is cited as <strong>211-opis/file</strong>: <em>211-14/33</em> is fond 211, inventory (<em>opis</em>) 14, file 33. For each village the inventory gives its <strong>folios</strong> (<em>filele</em>, <em>листы</em>, <em>listy</em>): the leaves of the original book, numbered by the archive, for example “folios 39-75”.</p>
+<p>A folio is not an image. An image of the reel usually shows a double page, that is two folios side by side, and the same leaf is sometimes photographed twice. The folios of the inventory therefore tell <strong>where a village sits in the file and how long it is</strong>, not an image number.</p>
+<p>A reel of microfilm carries several files one after the other, and the FamilySearch viewer opens <strong>one file at a time</strong>. The counter it shows (“955 of 1,182”) is the <strong>counter of the file</strong>, not of the reel: the image is the right one even when the number looks small.</p>
+<h2 id="noms">Village names</h2>
+<p>Villages are written in <strong>Romanian</strong>, with the spelling of the Archives' inventory (<em>Năvârneţ</em>); the current spelling (<em>Nevîrneț</em>) is given next to it. FamilySearch has catalogued the films under the <strong>Russian</strong> name of the time, transcribed in Latin letters. The search accepts both, and also older spellings of the same village (<em>Berezloghi</em> for <em>Berezlogi</em>). When the two names differ, the line of the result shows both.</p>
+<p>Many villages share the same name, in different uezds, and some villages have <strong>several churches</strong>, each with its own register. The <strong>church</strong> (its <em>hram</em>, that is its patron saint or feast: <em>Sf. Nicolae</em>, <em>Adormirea</em>) and the uezd tell them apart. Check both before opening an image. Church names are given as the inventory writes them, in Romanian (<em>Sf. Nicolae</em>, <em>Adormirea Maicii Domnului</em>).</p>
+<h2 id="pieges">Traps</h2>
+<ul class='illus-pieges'><li><strong>Years are missing.</strong> When a village has no line for a year, the register of that year may have been lost or never filmed, or the inventory may have been misread when this index was built. The index follows the inventory of the Archives, read by machine: a gap in the index does not prove that the register does not exist.</li><li><strong>A village can be in the file of a neighbouring parish.</strong> A village without a church was written in the register of the parish it belonged to, often under the name of that parish. Search for the neighbouring villages too.</li><li><strong>Dates follow the Julian calendar.</strong> The Russian Empire kept the old style: 12 days behind the Western calendar in the 19th century, 13 days in the 20th. A birth written on 12 January 1882 is 24 January in the Gregorian calendar.</li><li><strong>Names are written the Russian way.</strong> Given names take their Russian form (<em>Иванъ</em>, Ivan, for Ioan; <em>Георгій</em>, Georgiy, for Gheorghe), and a person is first identified by a patronymic: <em>Георгіева</em> (Georgieva) means “daughter of Gheorghe”, it is not a surname. The surname, when written, comes after.</li><li><strong>Links are accurate to a few images.</strong> The first page of a village is located on the film, not read page by page. Open it, read the folio written on the page, then go forward or back.</li></ul>
+</div>
+</main>
+<footer class="textes">
+<p>Built from the inventories of the National Archives of the Republic of Moldova and the FamilySearch film catalogue. No archive image is hosted here.</p><p>The data and this page are in the public domain (<a href='https://creativecommons.org/publicdomain/zero/1.0/' rel='license'>CC0 1.0</a>). Code and data: <a href='https://github.com/index-moldova-parish-registers/index-moldova-parish-registers.github.io'>public repository</a>.</p><p>To cite this index: <cite><em>Index of Bessarabian parish registers (ANRM fond 211)</em>, 2026, https://index-moldova-parish-registers.github.io/</cite>.</p><p>Found an error? <a href='https://github.com/index-moldova-parish-registers/index-moldova-parish-registers.github.io/issues'>Open an issue on the repository</a>.</p>
+</footer>
+<script>window.TEXTES={"placeholder": "Tomai, Tomai 1882, 14/33…", "stats": "{n} files of fond 211", "rien": "No result. Try a shorter spelling, without the year, or a file number.", "plus": "show {n} more", "sansTitre": "title not given by the inventory", "anInconnu": "year not given by the inventory", "filmSeul": "not in the inventory", "sansInv": "inventory not available", "sansTexte": "file not recorded in the inventory", "pasFilm": "not located on the film", "bobine": "reel {b}", "vues": "images {a}–{b}", "ouvrir": "Open at the village →", "debut": "Open at the start of the file →", "liste": "Files on the reel →", "debutLien": "start of the file →", "listeLien": "files on the reel →", "indiquer": "Suggest the right link", "indiquerListe": "Link not found yet, suggest the right link", "contribPh": "FamilySearch link of the image where this village starts", "contribImage": "image number (optional)", "envoyer": "Send", "annuler": "Cancel", "invalide": "This is not a link to a FamilySearch image: it must contain ark:/61903/3:1:…", "merci": "Thank you, it has arrived.", "erreur": "Sending failed. Please try again later.", "feuillets": "folios {f}", "toutes": "All", "tousUezd": "All uezds", "variantes": "other possible spellings: ", "sources": {"orthographe": "same name, other spelling", "film": "spelling used on the FamilySearch film", "inventaire": "second name given by the inventory", "wikidata": "confirmed by Wikidata", "agents": "checked match"}, "eglises": {"rabinat": "Rabbinate (Jewish register)", "adormire": "Adormirea Maicii Domnului", "mihail": "Sf. Arh. Mihail și Gavriil", "nicolae": "Sf. Nicolae", "dumitru": "Sf. Dumitru", "gheorghe": "Sf. Gheorghe", "paraschiva": "Sf. Parascheva", "ioan": "Sf. Ioan", "treime": "Sf. Treime", "nasterea": "Nașterea Maicii Domnului", "inaltare": "Înălțarea Domnului", "acoperamant": "Acoperământul Maicii Domnului", "petru": "Sf. Petru și Pavel", "vasile": "Sf. Vasile", "constantin": "Sf. Constantin și Elena", "schimbare": "Schimbarea la Față", "intrare": "Intrarea în Biserică", "buna_vestire": "Buna Vestire", "rusalii": "Pogorârea Sf. Duh", "ilie": "Sf. Ilie", "pantelimon": "Sf. Pantelimon", "andrei": "Sf. Andrei", "teodor": "Sf. Teodor", "tuturor_sfintilor": "Tuturor Sfinților", "trei_ierarhi": "Sf. Trei Ierarhi", "spiridon": "Sf. Spiridon", "varvara": "Sf. Varvara", "afanasie": "Sf. Afanasie", "haralambie": "Sf. Haralambie", "craciun": "Nașterea Domnului", "alexandru": "Sf. Alexandru Nevski", "grigore": "Sf. Grigore Teologul", "trifon": "Sf. Trifon", "mitrofan": "Sf. Mitrofan", "ecaterina": "Sf. Ecaterina", "elisabeta": "Sf. Elisabeta", "onufrie": "Sf. Onufrie", "ioachim_ana": "Sf. Ioachim și Ana", "luca": "Sf. Ap. Luca", "filip": "Sf. Filip", "averchie": "Sf. Averchie", "inviere": "Învierea Domnului", "intimpinare": "Întâmpinarea Domnului", "pavel_teba": "Sf. Pavel Tebeul", "pavel": "Sf. Ap. Pavel"}, "invAbsents": [21], "loc": "en"}; window.UEZD={"1": "Bălți", "12": "Bălți", "16": "Bălți", "2": "Tighina", "14": "Tighina", "27": "Tighina", "3": "Chișinău", "11": "Chișinău", "4": "Cahul", "17": "Cahul", "5": "Orhei", "13": "Orhei", "6": "Soroca", "15": "Soroca", "18": "Cetatea Albă", "22": "Cetatea Albă", "19": "Hotin", "34": "Hotin", "20": "Ismail", "23": "Tiraspol"}; window.CONTRIB={"url": "https://tanwrwmofpxsssismaqx.supabase.co", "cle": "sb_publishable_qESNKnFYlNkSaOBwNtZyHg_ZC3t4bn9"};</script>
+<script src="app.js?v=056c61f7"></script>
+<script>addEventListener("hashchange",function(){var q=document.getElementById("q");q.value=decodeURIComponent(location.hash.slice(1));document.getElementById("bouton").click();});</script>
+<script>(function(){document.querySelectorAll(".illus-fig").forEach(function(fig){
+var pl=fig.querySelector(".plaque"),zs=fig.querySelectorAll(".zone"),ls=fig.querySelectorAll("ol.illus-leg li");
+if(!pl||!zs.length)return;
+function pose(c,a){pl.classList.toggle("focalise",a);
+zs.forEach(function(z){var s=z.getAttribute("data-z")===c;z.classList.toggle("eteint",a&&!s);z.classList.toggle("actif",a&&s);});
+ls.forEach(function(l){l.classList.toggle("actif",a&&l.getAttribute("data-z")===c);});}
+function lie(x){var c=x.getAttribute("data-z");
+x.addEventListener("mouseenter",function(){pose(c,true);});x.addEventListener("mouseleave",function(){pose(c,false);});
+x.addEventListener("focus",function(){pose(c,true);});x.addEventListener("blur",function(){pose(c,false);});}
+zs.forEach(lie);ls.forEach(function(l){l.setAttribute("tabindex","0");lie(l);});});})();</script>
+<script data-goatcounter="https://imrp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

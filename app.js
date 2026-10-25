@@ -97,6 +97,11 @@
     document.getElementById("stats-ligne").textContent = T.stats.replace("{n}", D.length.toLocaleString(T.loc || "en"));
     var h = decodeURIComponent((location.hash || "").slice(1));
     if (h) { q.value = h; cherche(); }
+    // un numéro de l'inventaire en bas de page (#inv/dos) : même page, pas de rechargement
+    window.addEventListener("hashchange", function () {
+      var h = decodeURIComponent((location.hash || "").slice(1));
+      if (h && h !== "inventaire") { q.value = h; cherche(); window.scrollTo(0, 0); }
+    });
   }).catch(function (e) { console.error(e); document.getElementById("chargement").hidden = false; });
 
   function remplit(sel, tous, opts, choisi) {

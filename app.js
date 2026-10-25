@@ -203,7 +203,10 @@
       } else {
         a = lien(LISTE + pad(b[1]) + "&pageSize=100", T.listeLien || T.liste);
       }
-      if (l.vue) { a.className = "ouvrir"; acces.appendChild(a); }
+      if (l.vue) {
+        a.className = "ouvrir"; acces.appendChild(a);
+        if (window.fetch) avis(acces, a, l, vue);
+      }
       else {
         var r = el("div", "repli"); a.className = "repli-lien"; r.appendChild(a);
         if (window.CONTRIB && window.fetch) contrib(r, l, vue ? T.indiquer : T.indiquerListe);
@@ -252,6 +255,43 @@
         }).catch(function () { ok.disabled = false; msg.textContent = T.erreur; });
       });
     });
+  }
+
+  // le lien ouvre-t-il la bonne image ? 👍/👎 comme sur le site des
+  // catagrafii (table `reponses`, compteur GoatCounter) ; 👎 ouvre en plus
+  // le formulaire « proposer un lien » (Monica, 2026-10-25)
+  function avis(acces, a, l, vue) {
+    var cote = "F211-" + l.d.inv + "-" + l.d.dos, cle = "avis211|" + l.d.inv + "-" + l.d.dos + "|v" + vue;
+    var b = el("span", "avis"), r = el("div", "repli avis-contrib");
+    b.hidden = true; r.hidden = true;
+    var deja = null;
+    try { deja = localStorage.getItem(cle); } catch (e) {}
+    if (deja) b.dataset.vote = "1";
+    b.appendChild(el("span", "avis-q", T.avisQ));
+    [["ok", "\uD83D\uDC4D", T.avisOui], ["ko", "\uD83D\uDC4E", T.avisNon]].forEach(function (v) {
+      var btn = el("button", "avis-btn", v[1]); btn.type = "button";
+      btn.title = v[2]; btn.setAttribute("aria-label", v[2]);
+      btn.addEventListener("click", function () {
+        if (window.goatcounter && window.goatcounter.count)
+          window.goatcounter.count({ path: "avis-lien/" + v[0] + "/" + cote + "/v" + vue, title: v[2], event: true });
+        if (window.CONTRIB)
+          fetch(window.CONTRIB.url + "/rest/v1/reponses", {
+            method: "POST",
+            headers: { apikey: window.CONTRIB.cle, "Content-Type": "application/json", Prefer: "return=minimal" },
+            body: JSON.stringify({ question: cle.replace(/\|/g, "-").slice(0, 40), choix: v[0], langue: T.loc })
+          }).catch(function () {});
+        try { localStorage.setItem(cle, v[0]); } catch (e) {}
+        b.dataset.vote = "1";
+        b.textContent = ""; b.appendChild(el("span", "avis-merci", T.avisMerci));
+        if (v[0] === "ko" && window.CONTRIB) {
+          r.hidden = false; contrib(r, l, T.indiquer);
+          r.querySelector(".contrib-q").click();
+        }
+      });
+      b.appendChild(btn);
+    });
+    a.addEventListener("click", function () { if (b.dataset.vote !== "1") b.hidden = false; });
+    acces.appendChild(b); acces.appendChild(r);
   }
 
   document.getElementById("recherche").addEventListener("submit", cherche);

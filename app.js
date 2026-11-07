@@ -299,6 +299,74 @@
     acces.appendChild(b); acces.appendChild(r);
   }
 
+  // registres conservés hors du fonds 211 (archives d'Ismail, Odessa) : on
+  // les colle en lot, une ligne par registre, dans la même table
+  // `propositions` ; cote préfixée IZM- ou DAOO-, années dans `feuillet`
+  // (Ilya, Baurci 1820-1831 et 1855-1856, 2026-11-07)
+  var ARCHIVES = [["IZM", "Ізмаїльський архів (Ismail)"], ["DAOO", "ДАОО (Odessa)"]];
+  var MAX_AJOUT = 300;
+  function ajoutHors() {
+    var s = document.getElementById("ajout");
+    if (!s || !window.CONTRIB || !window.fetch || !T.ajoutTitre) return;
+    s.appendChild(el("h2", "", T.ajoutTitre));
+    s.appendChild(el("p", "", T.ajoutTexte));
+    var q = el("button", "btn", T.ajoutOuvrir); q.type = "button";
+    var f = el("form"); f.hidden = true;
+    var arch = el("select"); arch.id = "ajout-archive";
+    ARCHIVES.forEach(function (a) { var o = el("option", "", a[1]); o.value = a[0]; arch.appendChild(o); });
+    var la = el("label", "", T.ajoutArchive + " "); la.appendChild(arch);
+    var fmt = el("p", "ajout-format", T.ajoutFormat + " ");
+    fmt.appendChild(el("code", "", T.ajoutExemple));
+    var zone = el("textarea"); zone.spellcheck = false; zone.setAttribute("aria-label", T.ajoutFormat);
+    zone.placeholder = T.ajoutExemple;
+    var ok = el("button", "btn", T.envoyer); ok.type = "submit";
+    var boutons = el("div", "boutons"); boutons.appendChild(ok);
+    var msg = el("div", "contrib-msg");
+    [la, fmt, zone, boutons, msg].forEach(function (x) { f.appendChild(x); });
+    s.appendChild(q); s.appendChild(f); s.hidden = false;
+    q.addEventListener("click", function () { q.remove(); f.hidden = false; zone.focus(); });
+
+    function lis(texte) {
+      var lignes = [], pbs = [];
+      texte.split(/\r?\n/).forEach(function (brut, i) {
+        if (!brut.trim()) return;
+        var c = brut.split(/\t|;|\|/).map(function (x) { return x.trim(); });
+        var pb = function (m) { pbs.push(T.ajoutLigne.replace("{i}", i + 1).replace("{pb}", m)); };
+        var cote = /^(\d{1,4})[_\-\/.](\d{1,4})[_\-\/.](\d{1,5}[a-zA-Zа-яА-Я]?)$/.exec(c[0] || "");
+        var ans = /^(1[6-9]\d\d)(?:\s*[-–]\s*(1[6-9]\d\d))?$/.exec(c[1] || "");
+        var url = (c[3] || "").replace(/\s+/g, "");
+        if (!cote) return pb(T.ajoutCote);
+        if (!ans || (ans[2] && ans[2] < ans[1])) return pb(T.ajoutAns);
+        if (!c[2]) return pb(T.ajoutVillage);
+        if (!RE_ARK.test(url) || url.length > 400) return pb(T.ajoutLien);
+        lignes.push({ dosar: (arch.value + "-" + cote[1] + "-" + cote[2] + "-" + cote[3]).slice(0, 40),
+                      village: c[2].slice(0, 120), feuillet: ans[2] ? ans[1] + "-" + ans[2] : ans[1],
+                      langue: T.loc, lien: url });
+      });
+      return { lignes: lignes, pbs: pbs };
+    }
+
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var r = lis(zone.value);
+      msg.className = "contrib-msg erreur";
+      if (r.pbs.length) { msg.textContent = r.pbs.join("\n"); return; }
+      if (!r.lignes.length) { msg.textContent = T.ajoutVide; return; }
+      if (r.lignes.length > MAX_AJOUT) { msg.textContent = T.ajoutTrop.replace("{n}", MAX_AJOUT); return; }
+      ok.disabled = true;
+      fetch(window.CONTRIB.url + "/rest/v1/propositions", {
+        method: "POST",
+        headers: { apikey: window.CONTRIB.cle, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify(r.lignes)
+      }).then(function (rep) {
+        if (!rep.ok) throw new Error(rep.status);
+        zone.value = ""; ok.disabled = false;
+        msg.className = "contrib-msg"; msg.textContent = T.ajoutRecu.replace("{n}", r.lignes.length);
+      }).catch(function () { ok.disabled = false; msg.textContent = T.erreur; });
+    });
+  }
+  ajoutHors();
+
   document.getElementById("recherche").addEventListener("submit", cherche);
   [fU, fE, fDe, fA].forEach(function (s) { s.addEventListener("change", cherche); });
 })();

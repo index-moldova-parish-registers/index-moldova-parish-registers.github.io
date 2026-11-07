@@ -303,7 +303,9 @@
   // les colle en lot, une ligne par registre, dans la même table
   // `propositions` ; cote préfixée IZM- ou DAOO-, années dans `feuillet`
   // (Ilya, Baurci 1820-1831 et 1855-1856, 2026-11-07)
-  var ARCHIVES = [["IZM", "Ізмаїльський архів (Ismail)"], ["DAOO", "ДАОО (Odessa)"]];
+  // ДАЧО et « autre » ajoutés le 2026-11-07 (Monica)
+  var ARCHIVES = [["IZM", "Ізмаїльський архів (Ismail)"], ["DAOO", "ДАОО (Odessa)"],
+                  ["DACO", "ДАЧО (Chernivtsi)"], ["ALT", T.ajoutAutre]];
   var MAX_AJOUT = 300;
   function ajoutHors() {
     var s = document.getElementById("ajout");

@@ -1,6 +1,11 @@
-{"_": "Registres de Bessarabie conserves hors du fonds 211, envoyes par les visiteurs (table propositions, cote IZM-/DAOO-/DACO-/ALT-) et controles a la main avant d'entrer ici. H = [archive, fonds, inventaire, dossier, village, an1, an2, lien de la premiere image ou vide]. Jamais rempli par la routine. 2026-11-09 : propositions 239-241 (Baurci), 241 cotee 6030 par erreur (corrigee en 630) et envoyee avec le lien de 1820, lien de 1821 donne par Monica le meme jour.",
+{"_": "Registres de Bessarabie conserves hors du fonds 211, envoyes par les visiteurs (table propositions, cote IZM-/DAOO-/DACO-/ALT-) et controles a la main avant d'entrer ici. H = [archive, fonds, inventaire, dossier, village, an1, an2, lien de la premiere image ou vide]. Jamais rempli par la routine. 2026-11-09 : propositions 239-241 (Baurci), 241 cotee 6030 par erreur (corrigee en 630) et envoyee avec le lien de 1820, lien de 1821 donne par Monica le meme jour. Lot Facebook d'Ilya (2026-11-09) : 630-1-14 (1823) et 631-1-2 (1824) envoyes avec le lien 3QHJ-RWQC-16TL-8, deja donne pour 1821 : laisses sans lien jusqu'a verification.",
  "H": [
   ["IZM", "630", "1", "7", "Baurci", 1819, 1819, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-QWQC-HNB5-8?view=explore&groupId=TH-7754-165918-1294-67"],
   ["IZM", "630", "1", "9", "Baurci", 1820, 1820, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1653-G?view=explore&groupId=TH-7754-165918-1202-65"],
-  ["IZM", "630", "1", "11", "Baurci", 1821, 1821,  "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-16TL-8?view=explore&groupId=TH-7754-165918-3565-61"]
+  ["IZM", "630", "1", "11", "Baurci", 1821, 1821, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-16TL-8?view=explore&groupId=TH-7754-165918-3565-61"],
+  ["IZM", "630", "1", "14", "Baurci", 1823, 1823, ""],
+  ["IZM", "631", "1", "2", "Baurci", 1824, 1824, ""],
+  ["IZM", "631", "1", "3", "Baurci", 1825, 1825, "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1RSD-T?view=explore&groupId=TH-7736-166442-930451-33"],
+  ["IZM", "630", "1", "19", "Baurci", 1826, 1826, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1N9X-B?view=explore&groupId=TH-7714-165878-508416-65"],
+  ["IZM", "631", "1", "10_2", "Baurci", 1831, 1831, "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1PB2-1?view=explore&groupId=TH-7722-166428-10848-63"]
  ]}

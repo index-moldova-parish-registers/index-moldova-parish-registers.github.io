@@ -87,6 +87,17 @@
     L.forEach(function (l) { if (l.loc) l.d.texte = 1; });
     // la recherche passe aussi par les autres graphies possibles
     L.forEach(function (l) { l.f += " | " + l.vs.map(function (v) { return fold(v[0]); }).join(" | "); });
+    // registres hors du fonds 211 (site/hors211.json), mêlés à la recherche
+    // avec un simple rappel de l'archive (Monica, 2026-11-09)
+    fetch("hors211.json").then(function (r) { return r.ok ? r.json() : {H: []}; })
+      .then(function (h) {
+        (h.H || []).forEach(function (x) {
+          L.push({d: {hors: x[0], cote: x[1] + "-" + x[2] + "/" + x[3], fonds: x[1], bob: []}, loc: x[4],
+                  a0: x[5], a1: x[6] || x[5], eg: "", file: "", film: "", uz: "Ismail",
+                  url: x[7] || "", vs: [], f: fold(x[4])});
+        });
+        if (q.value) cherche();
+      }).catch(function () {});
     var u = {};
     Object.keys(UEZD).forEach(function (k) { u[UEZD[k]] = 1; });
     remplit(fU, T.tousUezd, Object.keys(u).sort().map(function (x) { return [x, x]; }), "");
@@ -140,7 +151,7 @@
       if (c.cote && (l.d.inv !== c.cote[0] || l.d.dos !== c.cote[1])) return false;
       if (c.mots.length && !c.mots.every(function (m) { return l.f.indexOf(m) !== -1; })) return false;
       if ((de || a) && l.a0 && ((de && l.a1 < de) || (a && l.a0 > a))) return false;
-      if (uz && UEZD[l.d.inv] !== uz) return false;
+      if (uz && (l.uz || UEZD[l.d.inv]) !== uz) return false;
       return true;
     });
     var n = {};
@@ -170,6 +181,7 @@
   // une carte : à gauche ce qui identifie la ligne (cote, nom écrit dans
   // l'inventaire, feuillets), puis ce qui sert au tri ; à droite le bouton
   function ligne(l) {
+    if (l.d.hors) return ligneHors(l);
     var d = l.d, c = el("article", "ligne"), corps = el("div", "ligne-corps");
     var tete = el("div", "ligne-tete");
     tete.appendChild(el("span", "cote", "211-" + d.inv + "/" + d.dos));
@@ -224,6 +236,29 @@
       }
     });
     if (bobs.length) c.appendChild(acces);
+    return c;
+  }
+
+  // un registre hors du fonds 211 : même carte, la cote de son archive, et
+  // en petit l'archive et son fonds (Monica, 2026-11-09)
+  function ligneHors(l) {
+    var c = el("article", "ligne"), corps = el("div", "ligne-corps");
+    var tete = el("div", "ligne-tete");
+    tete.appendChild(el("span", "cote", l.d.cote));
+    tete.appendChild(el("span", "ligne-loc", l.loc));
+    corps.appendChild(tete);
+    var info = el("div", "ligne-info");
+    info.appendChild(el("span", "ligne-ani", l.a0 === l.a1 ? String(l.a0) : l.a0 + "–" + l.a1));
+    info.appendChild(el("span", "badge", l.uz));
+    info.appendChild(el("span", "hors", ((T.hors && (T.hors[l.d.hors] || T.hors.ALT)) || l.d.hors + " {f}")
+      .replace("{f}", l.d.fonds)));
+    corps.appendChild(info);
+    c.appendChild(corps);
+    if (l.url) {
+      var acces = el("div", "ligne-acces"), r = el("div", "repli");
+      var a = lien(l.url, T.debutLien || T.debut); a.className = "repli-lien";
+      r.appendChild(a); acces.appendChild(r); c.appendChild(acces);
+    }
     return c;
   }
 

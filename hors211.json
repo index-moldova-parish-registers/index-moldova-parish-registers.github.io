@@ -1,11 +1,16 @@
-{"_": "Registres de Bessarabie conserves hors du fonds 211, envoyes par les visiteurs (table propositions, cote IZM-/DAOO-/DACO-/ALT-) et controles a la main avant d'entrer ici. H = [archive, fonds, inventaire, dossier, village, an1, an2, lien de la premiere image ou vide]. Jamais rempli par la routine. 2026-11-09 : propositions 239-241 (Baurci), 241 cotee 6030 par erreur (corrigee en 630) et envoyee avec le lien de 1820, lien de 1821 donne par Monica le meme jour. Lot Facebook d'Ilya (2026-11-09) : 630-1-14 (1823) et 631-1-2 (1824) envoyes avec le lien 3QHJ-RWQC-16TL-8, deja donne pour 1821 : laisses sans lien jusqu'a verification.",
+{"_": "Registres de Bessarabie conserves hors du fonds 211, envoyes par les visiteurs (table propositions, cote IZM-/DAOO-/DACO-/ALT-) et controles a la main avant d'entrer ici. H = [archive, fonds, inventaire, dossier, village, an1, an2, lien de la premiere image ou vide]. Jamais rempli par la routine. 2026-11-09 : propositions 239-241 (Baurci), 241 cotee 6030 par erreur (corrigee en 630) et envoyee avec le lien de 1820, lien de 1821 donne par Monica le meme jour. Lot Facebook d'Ilya (2026-11-09) : 630-1-14 (1823) et 631-1-2 (1824) envoyes avec le lien 3QHJ-RWQC-16TL-8, deja donne pour 1821 : laisses sans lien jusqu'a verification ; liens de 1823 et 1824 redonnes ensuite par Monica. 631-1-11 (1833) envoye avec le lien 2W91-H de 1824 : sans lien. 631-1-30 (1852) envoye avec le lien 1P7F-B de 1835 : sans lien. 631-1-35 (1856) envoye avec le lien WLFV de 1855 : sans lien. Bons liens de 1833, 1852 et 1856 renvoyes par Ilya ensuite.",
  "H": [
   ["IZM", "630", "1", "7", "Baurci", 1819, 1819, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-QWQC-HNB5-8?view=explore&groupId=TH-7754-165918-1294-67"],
   ["IZM", "630", "1", "9", "Baurci", 1820, 1820, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1653-G?view=explore&groupId=TH-7754-165918-1202-65"],
   ["IZM", "630", "1", "11", "Baurci", 1821, 1821, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-16TL-8?view=explore&groupId=TH-7754-165918-3565-61"],
-  ["IZM", "630", "1", "14", "Baurci", 1823, 1823, ""],
-  ["IZM", "631", "1", "2", "Baurci", 1824, 1824, ""],
+  ["IZM", "630", "1", "14", "Baurci", 1823, 1823,  "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1FB6-H?view=explore&groupId=TH-7754-165918-60334-25"],
+  ["IZM", "631", "1", "2", "Baurci", 1824, 1824,  "https://www.familysearch.org/ark:/61903/3:1:3QHJ-DW7M-2W91-H?view=explore&groupId=TH-7708-166414-212115-75"],
   ["IZM", "631", "1", "3", "Baurci", 1825, 1825, "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1RSD-T?view=explore&groupId=TH-7736-166442-930451-33"],
   ["IZM", "630", "1", "19", "Baurci", 1826, 1826, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1N9X-B?view=explore&groupId=TH-7714-165878-508416-65"],
-  ["IZM", "631", "1", "10_2", "Baurci", 1831, 1831, "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1PB2-1?view=explore&groupId=TH-7722-166428-10848-63"]
+  ["IZM", "631", "1", "10_2", "Baurci", 1831, 1831, "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1PB2-1?view=explore&groupId=TH-7722-166428-10848-63"],
+  ["IZM", "631", "1", "11", "Baurci", 1833, 1833,  "https://www.familysearch.org/ark:/61903/3:1:3QHJ-TWQB-S93T-9M?view=explore&groupId=TH-7708-166414-212017-72"],
+  ["IZM", "630", "1", "36", "Baurci", 1835, 1835, "https://www.familysearch.org/ark:/61903/3:1:3QHJ-RWQC-1P7F-B?view=explore&groupId=TH-7754-165918-259011-61"],
+  ["IZM", "631", "1", "30", "Baurci", 1852, 1852,  "https://www.familysearch.org/ark:/61903/3:1:3QHK-PWQ1-1RW2-2?view=explore&groupId=TH-7793-166499-680990-48"],
+  ["IZM", "631", "1", "34", "Baurci", 1855, 1855, "https://www.familysearch.org/ark:/61903/3:1:3QHN-5W4C-WLFV?view=explore&groupId=TH-7744-168080-39439-52"],
+  ["IZM", "631", "1", "35", "Baurci", 1856, 1856,  "https://www.familysearch.org/ark:/61903/3:1:3QHV-RW4H-5F56-D?view=explore&groupId=TH-7765-168564-426681-9"]
  ]}

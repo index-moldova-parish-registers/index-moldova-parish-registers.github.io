@@ -174,6 +174,11 @@
     var tete = el("div", "ligne-tete");
     tete.appendChild(el("span", "cote", "211-" + d.inv + "/" + d.dos));
     var loc = el("span", "ligne-loc", l.loc || l.film || T.sansTitre);
+    // un rattachement tranché (Copăceanca → Rîșcani) se lit entre parenthèses
+    l.vs.forEach(function (v) {
+      if (v[1] !== "rattache") return;
+      var r = el("span", "rattache", " (" + v[0] + ")"); r.title = T.sources.rattache || ""; loc.appendChild(r);
+    });
     if (l.loc && l.film && fold(l.film) !== fold(l.loc)) loc.appendChild(el("span", "film", l.film));
     tete.appendChild(loc);
     if (l.file) tete.appendChild(el("span", "fol", T.feuillets.replace("{f}", l.file)));

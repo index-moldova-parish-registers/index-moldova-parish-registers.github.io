@@ -56,7 +56,7 @@ The page itself can be opened on a search with the fragment: `#Tomai`,
   13 in the 20th), and given names take their Russian form (Иванъ = Ioan);
   a person is first identified by a patronymic, which is not a surname.
 - **The inventory can be wrong or incomplete**, and so can this index
-  (66347 of 75378 lines are located on the film; the others only have a
+  (66341 of 75378 lines are located on the film; the others only have a
   link to the start of the file). A year missing here does not prove the
   register does not exist. Nothing here replaces looking at the page.
 
